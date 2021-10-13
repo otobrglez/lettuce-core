@@ -68,6 +68,15 @@ interface RedisStringCoroutinesCommands<K : Any, V : Any> {
     suspend fun bitfield(key: K, bitFieldArgs: BitFieldArgs): List<Long>
 
     /**
+     * Execute `BITFIELD_RO` with its subcommands.
+     *
+     * @param key the key.
+     * @param bitFieldArgs the args containing subcommands, must not be `null`.
+     * @return Long bulk-reply the results from the bitfield commands.
+     */
+    suspend fun bitfieldRo(key: K, bitFieldArgs: BitFieldArgs): List<Long>
+
+    /**
      * Find first bit set or clear in a string.
      *
      * @param key the key.

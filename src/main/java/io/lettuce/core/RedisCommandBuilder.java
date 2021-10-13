@@ -269,6 +269,30 @@ class RedisCommandBuilder<K, V> extends BaseRedisCommandBuilder<K, V> {
         return createCommand(BITFIELD, (CommandOutput) new ValueValueListOutput<>(codec), args);
     }
 
+    Command<K, V, List<Long>> bitfieldRo(K key, BitFieldArgs bitFieldArgs) {
+        notNullKey(key);
+        LettuceAssert.notNull(bitFieldArgs, "BitFieldArgs must not be null");
+
+        CommandArgs<K, V> args = new CommandArgs<>(codec);
+        args.addKey(key);
+
+        bitFieldArgs.build(args);
+
+        return createCommand(BITFIELD_RO, (CommandOutput) new ArrayOutput<>(codec), args);
+    }
+
+    Command<K, V, List<Value<Long>>> bitfieldRoValue(K key, BitFieldArgs bitFieldArgs) {
+        notNullKey(key);
+        LettuceAssert.notNull(bitFieldArgs, "BitFieldArgs must not be null");
+
+        CommandArgs<K, V> args = new CommandArgs<>(codec);
+        args.addKey(key);
+
+        bitFieldArgs.build(args);
+
+        return createCommand(BITFIELD_RO, (CommandOutput) new ValueValueListOutput<>(codec), args);
+    }
+
     Command<K, V, Long> bitopAnd(K destination, K... keys) {
         LettuceAssert.notNull(destination, "Destination " + MUST_NOT_BE_NULL);
         notEmpty(keys);

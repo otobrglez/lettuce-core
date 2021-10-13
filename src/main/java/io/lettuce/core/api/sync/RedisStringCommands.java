@@ -74,6 +74,15 @@ public interface RedisStringCommands<K, V> {
     List<Long> bitfield(K key, BitFieldArgs bitFieldArgs);
 
     /**
+     * Execute {@code BITFIELD_RO} with its subcommands.
+     *
+     * @param key the key.
+     * @param bitFieldArgs the args containing subcommands, must not be {@code null}.
+     * @return Long bulk-reply the results from the bitfield commands.
+     */
+    List<Long> bitfieldRo(K key, BitFieldArgs bitFieldArgs);
+
+    /**
      * Find first bit set or clear in a string.
      *
      * @param key the key.

@@ -44,6 +44,8 @@ internal class RedisStringCoroutinesCommandsImpl<K : Any, V : Any>(internal val 
 
     override suspend fun bitfield(key: K, bitFieldArgs: BitFieldArgs): List<Long> = ops.bitfield(key, bitFieldArgs).map { it.value }.asFlow().toList()
 
+    override suspend fun bitfieldRo(key: K, bitFieldArgs: BitFieldArgs): List<Long> = ops.bitfieldRo(key, bitFieldArgs).map { it.value }.asFlow().toList()
+
     override suspend fun bitpos(key: K, state: Boolean): Long? = ops.bitpos(key, state).awaitFirstOrNull()
 
     override suspend fun bitpos(key: K, state: Boolean, start: Long): Long? = ops.bitpos(key, state, start).awaitFirstOrNull()

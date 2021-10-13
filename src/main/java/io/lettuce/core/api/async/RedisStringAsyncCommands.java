@@ -18,13 +18,7 @@ package io.lettuce.core.api.async;
 import java.util.List;
 import java.util.Map;
 
-import io.lettuce.core.BitFieldArgs;
-import io.lettuce.core.GetExArgs;
-import io.lettuce.core.KeyValue;
-import io.lettuce.core.RedisFuture;
-import io.lettuce.core.SetArgs;
-import io.lettuce.core.StrAlgoArgs;
-import io.lettuce.core.StringMatchResult;
+import io.lettuce.core.*;
 import io.lettuce.core.output.KeyValueStreamingChannel;
 
 /**
@@ -73,6 +67,15 @@ public interface RedisStringAsyncCommands<K, V> {
      * @return Long bulk-reply the results from the bitfield commands.
      */
     RedisFuture<List<Long>> bitfield(K key, BitFieldArgs bitFieldArgs);
+
+    /**
+     * Execute {@code BITFIELD_RO} with its subcommands.
+     *
+     * @param key the key.
+     * @param bitFieldReadArgs the args containing subcommands, must not be {@code null}.
+     * @return Long bulk-reply the results from the bitfield commands.
+     */
+    RedisFuture<List<Long>> bitfieldRo(K key, BitFieldReadArgs bitFieldReadArgs);
 
     /**
      * Find first bit set or clear in a string.
